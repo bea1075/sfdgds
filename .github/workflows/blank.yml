@@ -1,0 +1,17 @@
+name: Comro
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [8.x, 10.x, 12.x, 14.x, 16x]
+        mongodb-version: [4.0, 4.2, 4.4, 6.6]
+        redis-version: [4, 6]
+
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v2
+    - run: echo "done"
